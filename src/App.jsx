@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDebounce } from 'use-debounce';
 import Card from "./Componenets/Card";
+import Pages from "./Componenets/Pages";
 
 const App = () => {
   const [MovieList, setMovieList] = useState([]);
+  const [page , setPage ] = useState(1);
   const [searchMovie, setSearchMovie] = useState('');
   const [debouncedSearchTerm] = useDebounce(searchMovie, 500);
 
@@ -16,12 +18,12 @@ const App = () => {
       Authorization: `Bearer ${API_KEY}`,
     },
   };
-
+  let endd = 'discover/movie?include_adult=false&include_video=false&language=en-US&page=2&sort_by=popularity.desc';
   const fetchMovie = async (query = '') => {
     try {
       const endpoint = query
         ? `${BASE_URL}/search/movie?query=${encodeURIComponent(query)}`
-        : `${BASE_URL}/discover/movie?sort_by=popularity.desc`;
+        : `${BASE_URL}/discover/movie?page=${page}&sort_by=popularity.desc`;
 
       const response = await fetch(endpoint, API_OPTIONS);
       const data = await response.json();
@@ -31,10 +33,12 @@ const App = () => {
       console.log(error.message);
     }
   };
-
+  const pageChange = (changedPage = 1) => {
+    setPage(changedPage)
+  }
   useEffect(() => {
     fetchMovie(debouncedSearchTerm);
-  }, [debouncedSearchTerm]);
+  }, [debouncedSearchTerm , page]);
 
   return (
     <div className="bg-[url('/BG.png')] bg-cover  bg-no-repeat bg-center min-h-screen flex flex-col gap-0">
@@ -67,6 +71,7 @@ const App = () => {
           <Card key={movie.id} movie={movie}></Card>
         ))}
       </div>
+      <Pages pageChange = {pageChange}/>
     </div>
   );
 };
