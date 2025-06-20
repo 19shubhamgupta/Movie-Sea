@@ -12,9 +12,9 @@ const Pages = ({pageChange}) => {
   return (
     <div className="flex justify-center items-center gap-2 m-5">
       {page >= 2 && (
-        <button
+        <button    
           onClick={handleOnclick}
-          className="h-5 min-w-5 bg-slate-700 text-gray-300 rounded-sm text-center text-xl font-medium flex justify-center items-center px-2"
+          className={`h-5 min-w-5 bg-slate-700 text-gray-300 rounded-sm text-center text-xl font-medium flex justify-center items-center px-2`}
         >
           1
         </button>
@@ -27,7 +27,7 @@ const Pages = ({pageChange}) => {
 
       <button
         onClick={handleOnclick}
-        className="h-5 min-w-5 bg-slate-700 text-gray-300 rounded-sm text-center text-xl font-medium flex justify-center items-center px-2"
+        className={`h-5 min-w-5 bg-red-400 text-gray-300 rounded-sm text-center text-xl font-medium flex justify-center items-center px-2`}
       >
         {page}
       </button>
@@ -51,7 +51,7 @@ const Pages = ({pageChange}) => {
       {page < 98 && (
         <button
           onClick={handleOnclick}
-          className="h-5 min-w-5 bg-slate-700 text-gray-300 rounded-sm text-center text-xl font-medium flex justify-center items-center px-2"
+          className={`h-5 min-w-5 bg-slate-700 text-gray-300 rounded-sm text-center text-xl font-medium flex justify-center items-center px-2`}
         >
           100
         </button>
